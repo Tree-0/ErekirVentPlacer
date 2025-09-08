@@ -3,7 +3,6 @@
 Events.on(ClientLoadEvent, () => {
     
     const root = new Table();
-    root.setDebug(true);
     root.setFillParent(true);
     Vars.ui.hudGroup.addChild(root);
 
