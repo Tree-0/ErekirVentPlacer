@@ -7,7 +7,7 @@ Events.on(ClientLoadEvent, () => {
   root.add().grow();
 
   // Right column that will vertically center the button using spacers
-  const btnTable = new Table();      // <-- no functional constructor
+  const btnTable = new Table();
   root.add(btnTable).width(100).padRight(8);
 
   // Top spacer
@@ -15,12 +15,11 @@ Events.on(ClientLoadEvent, () => {
   btnTable.row();
 
   // Build the button (icon if found, otherwise text)
-  const region = Core.atlas.find("turbine-condenser-overlay");
+  const region = Core.atlas.find("erekir-vent-placer-turbine-condenser-overlay");
   let btn;
   if (region && region.found && region.found()) {
     const icon = new TextureRegionDrawable(region);
-    // Use an ImageButton *style*; cleari is a safe transparent style
-    btn = new ImageButton(icon, Styles.cleari);
+    btn = new ImageButton(icon, Styles.black3);
   } else {
     btn = new TextButton("Run", Styles.cleart);
   }
