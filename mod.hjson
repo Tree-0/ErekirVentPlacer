@@ -4,7 +4,7 @@
     author: Tree
     description: "I am unreasonably annoyed by trying to place vents in Eviction. This mod does it for me, and connects them with power nodes."
     version: "0.0"
-    minGameVersion: "151.1"
+    minGameVersion: "146.0"
     dependencies: [ ]
     hidden: false
 }
