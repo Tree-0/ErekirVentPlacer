@@ -1,36 +1,39 @@
-//require("ErekirVentPlacer/scripts/place-vents")
-
 Events.on(ClientLoadEvent, () => {
-    
-    const root = new Table();
-    root.setFillParent(true);
-    Vars.ui.hudGroup.addChild(root);
+  const root = new Table();
+  root.setFillParent(true);
+  Vars.ui.hudGroup.addChild(root);
 
-    root.add().grow();
+  // Left spacer eats horizontal space
+  root.add().grow();
 
-    btnTable = new Table(t => {
-        // top spacer
-        t.add().grow();
-        
-        // icon for button
-        const region = Core.atlas.find("turbine-condenser-overlay");
-        const icon_erekir_turbine = new TextureRegionDrawable(region);
-        const ventBtn = new ImageButton(icon_erekir_turbine, Styles.black3);
+  // Right column that will vertically center the button using spacers
+  const btnTable = new Table();      // <-- no functional constructor
+  root.add(btnTable).width(100).padRight(8);
 
-        // PREFERRED: listen for ChangeEvent (fires when pressed)
-        ventBtn.addListener(new ChangeListener({
-        changed: (e, a) => {
-            Vars.ui.hudfrag.showToast("Clicked!");
-            // TODO: do your action
-        }
-        }));
+  // Top spacer
+  btnTable.add().grow();
+  btnTable.row();
 
-        t.add(ventBtn).size(64).padRight(8);
-        t.row();
-        // bottom spacer
-        t.add().grow();
+  // Build the button (icon if found, otherwise text)
+  const region = Core.atlas.find("turbine-condenser-overlay");
+  let btn;
+  if (region && region.found && region.found()) {
+    const icon = new TextureRegionDrawable(region);
+    // Use an ImageButton *style*; cleari is a safe transparent style
+    btn = new ImageButton(icon, Styles.cleari);
+  } else {
+    btn = new TextButton("Run", Styles.cleart);
+  }
 
-    });
+  // Click handler (sugar over ChangeListener)
+  btn.clicked(() => {
+    Vars.ui.hudfrag.showToast("Clicked!");
+    // TODO: your action
+  });
 
-    root.add(btnTable).width(100).padRight(8);
+  btnTable.add(btn).size(64).padRight(8);
+  btnTable.row();
+
+  // Bottom spacer
+  btnTable.add().grow();
 });
