@@ -45,14 +45,14 @@ Events.on(ClientLoadEvent, () => {
   btnTable.add().grow();
 });
 
-Events.on(TapEvent, (player, tile) => {
-  pu = player?.unit()
-  px = pu ? player.x : -1.0;
-  py = pu ? player.y : -1.0;
-  mx = Core.input.mouseWorldX();
-  my = Core.input.mouseWorldY();
+// Events.on(TapEvent, (player, tile) => {
+//   pu = player?.unit()
+//   px = pu ? player.x : -1.0;
+//   py = pu ? player.y : -1.0;
+//   mx = Core.input.mouseWorldX();
+//   my = Core.input.mouseWorldY();
   
-  if (px != -1 && py != -1) {
-    Vars.ui.hudfrag.showToast(`Player is at (${px},${py})\nMouse is at (${mx},${my})`);
-  }
-});
+//   if (px != -1 && py != -1) {
+//     Vars.ui.hudfrag.showToast(`Player is at (${px},${py})\nMouse is at (${mx},${my})`);
+//   }
+// });
