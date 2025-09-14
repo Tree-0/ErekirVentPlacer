@@ -1,10 +1,13 @@
 let placeVent = require("erekir-vent-placer/place-vent");
+Vars.ui.hudfrag.showToast("Erekir Vent Placer installed...");
 
 let px; let py; let mx; let my;
 let maxVentsToFind;
 let maxDistanceFromPlayer;
 
 Events.on(ClientLoadEvent, () => {
+  Vars.ui.hudfrag.showToast("Vent UI loading...");
+
   const root = new Table();
   root.setFillParent(true);
   Vars.ui.hudGroup.addChild(root);
@@ -27,6 +30,7 @@ Events.on(ClientLoadEvent, () => {
     const icon = new TextureRegionDrawable(region);
     ventBtn = new ImageButton(icon, Styles.black3);
   } else {
+    Vars.ui.hudfrag.showToast("Vent icon not found...");
     ventBtn = new TextButton("PlaceVents", Styles.black3);
   }
 
