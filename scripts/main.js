@@ -1,3 +1,19 @@
+let placeVent = require("erekir-vent-placer/place-vent");
+
+let maxVentsToFind;
+let maxDistanceFromPlayer;
+
+Events.on(TapEvent, (player, tile) => {
+  let px = player ? player.x : -1.0;
+  let py = player ? player.y : -1.0;
+  let mx = Core.input.mouseWorldX();
+  let my = Core.input.mouseWorldY();
+  
+  if (px != -1 && py != -1) {
+    Vars.ui.hudfrag.showToast(`Player is at (${px},${py})\nMouse is at (${mx},${my})`);
+  }
+});
+
 Events.on(ClientLoadEvent, () => {
   const root = new Table();
   root.setFillParent(true);
@@ -16,21 +32,23 @@ Events.on(ClientLoadEvent, () => {
 
   // Build the button (icon if found, otherwise text)
   const region = Core.atlas.find("erekir-vent-placer-turbine-condenser-overlay");
-  let btn;
+  let ventBtn;
   if (region && region.found && region.found()) {
     const icon = new TextureRegionDrawable(region);
-    btn = new ImageButton(icon, Styles.black3);
+    ventBtn = new ImageButton(icon, Styles.black3);
   } else {
-    btn = new TextButton("Run", Styles.cleart);
+    ventBtn = new TextButton("PlaceVents", Styles.black3);
   }
 
-  // Click handler (sugar over ChangeListener)
-  btn.clicked(() => {
-    Vars.ui.hudfrag.showToast("Clicked!");
-    // TODO: your action
+  // vent placer
+  ventBtn.clicked(() => {
+    Vars.ui.hudfrag.showToast(`Clicked`);
+    maxVentsToFind = 4;
+    maxDistanceFromPlayer = 50;
+    //placeVent.placeAndWireVents(maxVentsToFind, maxDistanceFromPlayer);
   });
 
-  btnTable.add(btn).size(64).padRight(8);
+  btnTable.add(ventBtn).size(64).padRight(8);
   btnTable.row();
 
   // Bottom spacer
