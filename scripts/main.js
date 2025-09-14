@@ -1,18 +1,8 @@
 let placeVent = require("erekir-vent-placer/place-vent");
 
+let px; let py; let mx; let my;
 let maxVentsToFind;
 let maxDistanceFromPlayer;
-
-Events.on(TapEvent, (player, tile) => {
-  let px = player ? player.x : -1.0;
-  let py = player ? player.y : -1.0;
-  let mx = Core.input.mouseWorldX();
-  let my = Core.input.mouseWorldY();
-  
-  if (px != -1 && py != -1) {
-    Vars.ui.hudfrag.showToast(`Player is at (${px},${py})\nMouse is at (${mx},${my})`);
-  }
-});
 
 Events.on(ClientLoadEvent, () => {
   const root = new Table();
@@ -53,4 +43,16 @@ Events.on(ClientLoadEvent, () => {
 
   // Bottom spacer
   btnTable.add().grow();
+});
+
+Events.on(TapEvent, (player, tile) => {
+  pu = player?.unit()
+  px = pu ? player.x : -1.0;
+  py = pu ? player.y : -1.0;
+  mx = Core.input.mouseWorldX();
+  my = Core.input.mouseWorldY();
+  
+  if (px != -1 && py != -1) {
+    Vars.ui.hudfrag.showToast(`Player is at (${px},${py})\nMouse is at (${mx},${my})`);
+  }
 });
